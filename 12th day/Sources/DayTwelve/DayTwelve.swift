@@ -1,8 +1,19 @@
+import Foundation
+
+class Vertex {
+    var key: String
+    var visited: Bool = false
+    var adjacent = [Vertex]()
+    
+    init(_ key: String) {
+        self.key = key
+    }
+}
+
 @main
 public struct DayTwelve {
-    public private(set) var text = "Hello, World!"
 
     public static func main() {
-        print(DayTwelve().text)
+        
     }
 }
