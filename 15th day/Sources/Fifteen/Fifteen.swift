@@ -23,10 +23,10 @@ public struct Fifteen {
     public static func main() {
         let this: Fifteen = Fifteen()
 
-        let sensors: [Sensor] = this.parseInput(input: PuzzleInput.example)
-        let lineToCheck: Int = 10
-        // let sensors: [Sensor] = this.parseInput(input: PuzzleInput.input)
-        // let lineToCheck: Int = 2000000
+        // let sensors: [Sensor] = this.parseInput(input: PuzzleInput.example)
+        // let lineToCheck: Int = 10
+        let sensors: [Sensor] = this.parseInput(input: PuzzleInput.input)
+        let lineToCheck: Int = 2000000
 
         var placesWhereNoBeaconOneLine: Int = 0
         
@@ -37,12 +37,12 @@ public struct Fifteen {
         
         
         for sensor in sensors {
-            // let sensor = sensors[6]
+            // let sensor = sensors[8]
             let size: Int = this.getRauteSize(sensor: sensor)
 
-            let sensorLeftY: Int = sensor.sensor.y - size
-            let sensorRightY: Int = sensor.sensor.y + size
-            let sensorYRange: ClosedRange = sensorLeftY...sensorRightY
+            let sensorBottomY: Int = sensor.sensor.y - size
+            let sensorTopY: Int = sensor.sensor.y + size
+            let sensorYRange: ClosedRange = sensorBottomY...sensorTopY
             // print("Y")
             // print(sensorLeftY, sensorRightY)
 
@@ -52,10 +52,8 @@ public struct Fifteen {
 
             let lineDistanceToSensor: Int = abs(sensor.sensor.y - lineToCheck)
 
-            let sensorLeftX: Int = sensor.sensor.y - size + lineDistanceToSensor
-            let sensorRightX: Int = sensor.sensor.y + size - lineDistanceToSensor
-            // print("X")
-            // print(sensorLeftX, sensorRightX)
+            let sensorLeftX: Int = sensor.sensor.x - size + lineDistanceToSensor
+            let sensorRightX: Int = sensor.sensor.x + size - lineDistanceToSensor
 
             let sensorXRange: ClosedRange<Int> = sensorLeftX...sensorRightX
             rangesOneLineSensor.append(sensorXRange)
@@ -83,9 +81,8 @@ public struct Fifteen {
 
         print("bei zählen")
 
-        let rangesOneLineSensorJoined = rangesOneLineSensor.joined().uniqued()
+        let rangesOneLineSensorJoined: [Int] = rangesOneLineSensor.joined().uniqued()
         print("nach uniqued")
-        print(rangesOneLineSensorJoined)
 
         for _ in rangesOneLineSensorJoined {
             placesWhereNoBeaconOneLine += 1
